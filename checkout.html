@@ -4,90 +4,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEAVE THE LOOP | BLCKÜ</title>
+  <title>BLCKÜ Checkout</title>
   <style>
     body, html {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       height: 100vh;
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
     }
-
-    .hidden { display: none; }
-    .fade { animation: fadeOut 3s ease-in-out forwards; }
-
-    button, select, input {
+    input, select, button {
+      margin: 10px;
+      padding: 10px;
+      width: 80%;
+      max-width: 300px;
       background: black;
       color: white;
       border: 1px solid white;
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      width: 80%;
-      max-width: 300px;
-    }
-
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    .thank-you-message {
-      display: none;
-      text-align: center;
-      animation: fadeIn 2s ease-in forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div id="checkout-form">
-    <h1>LEAVE THE LOOP</h1>
-    <label for="size">Select Size:</label>
-    <select id="size">
-      <option value="S">S</option>
-      <option value="M">M</option>
-      <option value="L">L</option>
-      <option value="XL">XL</option>
-    </select>
-    <input type="text" id="name" placeholder="Name" required />
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="text" id="address" placeholder="Shipping Address" required />
-    <button onclick="completeCheckout()">Checkout</button>
-  </div>
-
-  <div class="thank-you-message" id="thankYou">
-    <h2>You’ve left the loop.</h2>
-    <p>Check your email.</p>
-  </div>
-
-  <script>
-    function completeCheckout() {
-      const form = document.getElementById('checkout-form');
-      const thankYou = document.getElementById('thankYou');
-
-      form.classList.add('fade');
-      setTimeout(() => {
-        form.style.display = 'none';
-        thankYou.style.display = 'block';
-      }, 3000);
-    }
-
-    // Reset on refresh
-    window.onload = () => {
-      if (window.location.pathname.includes("thankyou")) {
-        window.location.href = "/";
-      }
-    };
-  </script>
+  <h1>MYSTERY ITEM – $30</h1>
+  <p>No preview. No flex. Just faith.</p>
+  <select id="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+  <input type="text" placeholder="Name" />
+  <input type="email" placeholder="Email" />
+  <input type="text" placeholder="Shipping Address" />
+  <button onclick="location.href='confirmation.html'">Checkout</button>
 </body>
 </html>
