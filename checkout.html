@@ -5,34 +5,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BLCKÜ Checkout</title>
+  <script src="https://js.stripe.com/v3/"></script>
   <style>
     body, html {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       height: 100vh;
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    input, select, button {
-      margin: 10px;
+    h1, p {
+      text-align: center;
+    }
+    .form-control {
+      margin: 10px 0;
+      width: 300px;
       padding: 10px;
-      width: 80%;
-      max-width: 300px;
       background: black;
       color: white;
       border: 1px solid white;
     }
+    #card-element {
+      background: white;
+      color: black;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    #thank-you {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
-  <h1>MYSTERY ITEM – $30</h1>
-  <p>No preview. No flex. Just faith.</p>
-  <select id="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
-  <input type="text" placeholder="Name" />
-  <input type="email" placeholder="Email" />
-  <input type="text" placeholder="Shipping Address" />
-  <button onclick="location.href='confirmation.html'">Checkout</button>
+  <div id="checkout-form">
+    <h1>BLCKÜ MYSTERY ITEM – $30</h1>
+    <p>Faith over preview. Leave the loop.</p>
+    <input class="form-control" type="text" id="name" placeholder="Name" required />
+    <input class="form-control" type="email" id="email" placeholder="Email" required />
+    <input class="form-control" type="text" id="address" placeholder="Shipping Address" required />
+    <select class="form-control" id="size">
+      <option value="">Select Size</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+    </select>
+    <div id="card-element" class="form-control"></div>
+    <button id="submit">Checkout</button>
+  </div>
+
+  <div id="thank-you">
+    <h2>You’ve left the loop.</h2>
+    <p>Check your email.</p>
+  </div>
+
+  <script>
+    const stripe = Stripe('pk_live_51R9DjtLOsplKmTxDAhMIuu5T4u3lXRGZxVWQ2nZ7UYeIXEQwdXqCBbPR72HAF4HS9jxRijc14ktHPOPKW9RHl5bR00UEUy7ksX');
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
+
+    const form = document.getElementById('checkout-form');
+    const thankYou = document.getElementById('thank-you');
+    const submitButton = document.getElementById('submit');
+
+    submitButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: card,
+        billing_details: {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+        },
+      });
+
+      if (!error) {
+        // Fake success for demo purposes
+        form.style.display = 'none';
+        thankYou.style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = 'reveal.html';
+        }, 4000);
+      } else {
+        alert('Payment failed: ' + error.message);
+      }
+    });
+  </script>
 </body>
 </html>
