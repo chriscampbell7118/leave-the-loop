@@ -3,89 +3,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I LEFT THE LOOP | BLCKÜ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLCKÜ</title>
   <style>
     body, html {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       height: 100vh;
       background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .launch-screen, .main-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .main-content {
-      display: none;
-      animation: fadeIn 2s forwards;
-    }
-
-    .launch-button, .product-button {
+    button {
       background: none;
       border: 2px solid white;
       color: white;
-      padding: 16px 32px;
-      margin: 16px;
+      padding: 20px 40px;
       font-size: 18px;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .launch-button:hover, .product-button:hover {
-      background-color: white;
-      color: black;
-    }
-
-    .product-title {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-
-    iframe {
-      width: 560px;
-      height: 315px;
-      margin-top: 20px;
-      border: none;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-      iframe {
-        width: 90%;
-        height: 200px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="launch-screen" id="launchScreen">
-    <button class="launch-button" onclick="enterSite()">Enter The Frequency</button>
-  </div>
-
-  <div class="main-content" id="mainContent">
-    <div class="product-title">I LEFT THE LOOP</div>
-    <button class="product-button" onclick="location.href='mailto:chris.campbell7118@gmail.com?subject=Leave the Loop'">Leave The Loop</button>
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" allowfullscreen></iframe>
-  </div>
-
-  <script>
-    function enterSite() {
-      document.getElementById('launchScreen').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'flex';
-    }
-  </script>
+  <button onclick="window.location.href='leave.html'">Enter The Frequency</button>
 </body>
 </html>

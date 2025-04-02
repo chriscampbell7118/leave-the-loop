@@ -19,9 +19,7 @@
       align-items: center;
       justify-content: center;
     }
-    h1, p {
-      text-align: center;
-    }
+    h1, p { text-align: center; }
     .form-control {
       margin: 10px 0;
       width: 300px;
@@ -45,17 +43,12 @@
       border: none;
       cursor: pointer;
     }
-    #thank-you {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
   </style>
 </head>
 <body>
   <div id="checkout-form">
     <h1>BLCKÜ MYSTERY ITEM – $30</h1>
-    <p>Faith over preview. Leave the loop.</p>
+    <p>No preview. Just faith.</p>
     <input class="form-control" type="text" id="name" placeholder="Name" required />
     <input class="form-control" type="email" id="email" placeholder="Email" required />
     <input class="form-control" type="text" id="address" placeholder="Shipping Address" required />
@@ -70,24 +63,15 @@
     <button id="submit">Checkout</button>
   </div>
 
-  <div id="thank-you">
-    <h2>You’ve left the loop.</h2>
-    <p>Check your email.</p>
-  </div>
-
   <script>
     const stripe = Stripe('pk_live_51R9DjtLOsplKmTxDAhMIuu5T4u3lXRGZxVWQ2nZ7UYeIXEQwdXqCBbPR72HAF4HS9jxRijc14ktHPOPKW9RHl5bR00UEUy7ksX');
     const elements = stripe.elements();
     const card = elements.create('card');
     card.mount('#card-element');
 
-    const form = document.getElementById('checkout-form');
-    const thankYou = document.getElementById('thank-you');
     const submitButton = document.getElementById('submit');
-
     submitButton.addEventListener('click', async (e) => {
       e.preventDefault();
-
       const { paymentMethod, error } = await stripe.createPaymentMethod({
         type: 'card',
         card: card,
@@ -96,14 +80,8 @@
           email: document.getElementById('email').value,
         },
       });
-
       if (!error) {
-        // Fake success for demo purposes
-        form.style.display = 'none';
-        thankYou.style.display = 'flex';
-        setTimeout(() => {
-          window.location.href = 'reveal.html';
-        }, 4000);
+        window.location.href = 'confirmation.html';
       } else {
         alert('Payment failed: ' + error.message);
       }
