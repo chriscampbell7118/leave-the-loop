@@ -19,17 +19,31 @@
       align-items: center;
       text-align: center;
     }
+
     img {
       margin-top: 20px;
       width: 80%;
       max-width: 500px;
+      display: none;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    .fade-in {
       display: block;
+      opacity: 1;
     }
   </style>
 </head>
 <body>
   <h2>You’ve left the loop.</h2>
   <p>Check your email.</p>
-  <img src="https://raw.githubusercontent.com/chriscampbell7118/leave-the-loop/main/F9474973-6553-4FDF-92D4-03198357F599.png" alt="BLCKÜ Product" />
+  <img id="revealImage" src="https://raw.githubusercontent.com/chriscampbell7118/leave-the-loop/main/F9474973-6553-4FDF-92D4-03198357F599.png" alt="BLCKÜ Product" />
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("revealImage").classList.add("fade-in");
+    }, 4000);
+  </script>
 </body>
 </html>
